@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>create student</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap
+.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+       <div align="center">
+       
+       <div th:if="${student.id==null}"><h1>Create Student...</h1></div>
+       <div th:unless="${student.id==null}"><h1>Edit Student...</h1></div>
+       <div >
+           <a class="h2" th:href="@{/listall}">List Students</a>
+       </div>
+       </br>
+       </br>
+       
+       <form th:action=@{/student/save} th:object=${student} method="post"> 
+       <input type="hidden" th:field="*{id}" th:value="${student.id}"/>
+        <div>
+            <label class="h5"  for="name">Name:</label>
+            <input id="name" type="text" th:field="*{name}" placeholder="Enter your name" required>
+        </div>
+        
+        <div>
+            <label class="h5" for="number">Mobile:</label>
+            <input id="number" type="number" th:field="*{number}" placeholder="Enter your number"
+           required> 
+        </div> 
+        
+        <div >
+           <label class="h5" >Course: </label>
+              <div >
+                 <select  th:field="*{course}"  multiple="multiple" required>
+				        <th:block th:each="cou : ${courses}">
+                           <option th:text="${cou.course}" th:value="${cou.id}"></option>
+                         </th:block>
+				</select>
+              </div>
+          
+         </div>
+        
+        
+        <button type="submit">Save</button>
+    </form>
+       
+       
+       </div>
+</body>
+</html>
