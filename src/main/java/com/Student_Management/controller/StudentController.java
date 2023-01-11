@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,7 +46,7 @@ public class StudentController {
 	}
 	
 	@PostMapping("/student/save")
-	public String saveStudent(Student student, Model model) {
+	public String saveStudent(@ModelAttribute Student student, Model model) {
 		studentService.saveStudent(student);
 		return "redirect:/";
 	}
@@ -54,6 +55,7 @@ public class StudentController {
 	public String updateformStudent(@PathVariable("id") long id, Model model) {
 		List<Course> courses = courseRepo.findAll();
 		Student student = studentService.findStudentByID(id);
+		System.out.println(student.getCourse());
 		
 		model.addAttribute("courses", courses);
 		model.addAttribute("student", student);

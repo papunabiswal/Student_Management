@@ -7,18 +7,22 @@ import java.util.Set;
 
 
 import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.ToString;
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 
 
 @Entity
@@ -31,50 +35,12 @@ public class Student {
 	private String name;
 	
 	private Long number;
-
+	
 	@ManyToMany
+ // @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}) :- for delete problem solve
 	@JoinColumn(name="student_id")
-	private List<Course> course = new ArrayList<Course>();
+	private Set<Course> course = new HashSet<Course>();
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Long getNumber() {
-		return number;
-	}
-
-	public void setNumber(Long number) {
-		this.number = number;
-	}
-
-	public List<Course> getCourse() {
-		return course;
-	}
-
-	public void setCourse(List<Course> course) {
-		this.course = course;
-	}
-
-	public Student() {
-		
-	}
-
-
-	
-	
 	
 	
 }

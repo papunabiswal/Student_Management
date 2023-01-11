@@ -30,12 +30,12 @@
            required> 
         </div> 
         
-        <div >
+     <div >
            <label class="h5" >Course: </label>
               <div >
                  <select  th:field="*{course}"  multiple="multiple" required>
-				        <th:block th:each="cou : ${courses}">
-                           <option th:text="${cou.course}" th:value="${cou.id}"></option>
+				        <th:block th:each="course : ${courses}">
+                           <option th:text="${course.course}" th:value="${course.id}"></option>
                          </th:block>
 				</select>
               </div>
